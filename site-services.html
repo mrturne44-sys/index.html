@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Création de sites web pour commerces</title>
+<meta name="description" content="Je crée le site de ton commerce. Tes clients te commandent directement sur WhatsApp.">
+<style>
+  :root{
+    --encre:#0F1720;
+    --citron:#D7F75B;
+    --papier:#F4F5EF;
+    --bleu:#2A4BE8;
+    --gris:#55606B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--encre);background:var(--papier);line-height:1.55;font-size:17px}
+  h1,h2,h3{line-height:1.05;letter-spacing:-.03em;font-weight:800}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--bleu);outline-offset:3px}
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+
+  /* Hero */
+  .hero{background:var(--encre);color:#fff;padding:44px 0 56px}
+  .marque{font-weight:800;font-size:1.05rem;margin-bottom:34px;display:flex;align-items:center;gap:10px}
+  .marque i{width:14px;height:14px;background:var(--citron);border-radius:4px;display:inline-block}
+  .hero h1{font-size:clamp(2.3rem,9.5vw,4.2rem);max-width:13ch}
+  .hero h1 em{font-style:normal;color:var(--citron)}
+  .hero p.lead{color:#B9C3CC;max-width:36ch;margin:16px 0 26px;font-size:1.05rem}
+
+  .btn{display:inline-block;text-decoration:none;font-weight:700;padding:14px 20px;border-radius:12px;border:0;font-size:1rem;cursor:pointer;font-family:inherit}
+  .btn.wa{background:var(--citron);color:var(--encre)}
+  .btn.clair{background:#fff;color:var(--encre)}
+  .btn:active{transform:translateY(1px)}
+
+  /* Bulle de conversation (démonstration) */
+  .chat{margin-top:34px;background:#1A2530;border-radius:18px;padding:16px;max-width:380px}
+  .chat small{display:block;color:#8FA0AE;font-size:.8rem;margin-bottom:10px}
+  .bulle{background:#DCF8C6;color:#13210F;border-radius:14px 14px 4px 14px;padding:10px 13px;margin-left:auto;max-width:88%;font-size:.95rem}
+  .bulle + .bulle{margin-top:8px}
+  .bulle.recu{background:#fff;color:var(--encre);border-radius:14px 14px 14px 4px;margin-left:0}
+
+  section{padding:54px 0 4px}
+  section h2{font-size:clamp(1.8rem,6vw,2.4rem);margin-bottom:8px}
+  section p.sub{color:var(--gris);margin-bottom:22px;max-width:44ch}
+
+  /* Avantages */
+  .avantages{display:grid;gap:12px}
+  .avantages div{background:#fff;border:2px solid var(--encre);border-radius:14px;padding:16px}
+  .avantages strong{display:block;margin-bottom:2px}
+  .avantages span{color:var(--gris);font-size:.95rem}
+
+  /* Offres */
+  .offre{background:#fff;border:2px solid var(--encre);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:5px 5px 0 var(--encre)}
+  .offre-tete{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .offre h3{font-size:1.3rem}
+  .offre .prix{font-weight:800;font-size:1.25rem;background:var(--citron);padding:2px 10px;border-radius:8px;white-space:nowrap}
+  .offre p{color:var(--gris);margin:8px 0 14px}
+  .offre .btn{background:var(--encre);color:#fff;padding:11px 16px;font-size:.95rem}
+
+  /* Exemples */
+  .exemple{display:block;text-decoration:none;background:var(--encre);color:#fff;border-radius:16px;padding:18px;margin-bottom:12px}
+  .exemple h3{font-size:1.25rem;color:var(--citron)}
+  .exemple p{color:#B9C3CC;margin-top:4px;font-size:.95rem}
+  .exemple span{display:inline-block;margin-top:10px;font-weight:700;text-decoration:underline}
+
+  /* Étapes */
+  .etapes{list-style:none;counter-reset:e}
+  .etapes li{counter-increment:e;position:relative;padding:0 0 18px 50px}
+  .etapes li::before{content:counter(e);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--encre);color:var(--citron);font-weight:800;display:flex;align-items:center;justify-content:center}
+  .etapes strong{display:block}
+  .etapes span{color:var(--gris);font-size:.95rem}
+
+  /* Contact */
+  .contact{background:var(--citron);border-radius:20px;padding:28px 22px;margin:54px 0 0}
+  .contact h2{margin-bottom:8px}
+  .contact p{margin-bottom:18px}
+  .reseaux{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .reseaux a{background:var(--encre);color:#fff;text-decoration:none;font-weight:700;padding:11px 16px;border-radius:12px;font-size:.95rem}
+
+  footer{text-align:center;padding:34px 20px 100px;color:var(--gris);font-size:.85rem}
+
+  .flottant{position:fixed;right:16px;bottom:16px;background:#1FA855;color:#fff;text-decoration:none;font-weight:700;padding:14px 20px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.3);z-index:6}
+
+  /* Éditeur */
+  #editeur{position:fixed;inset:0;background:#fff;z-index:30;display:flex;flex-direction:column}
+  .ed-haut{background:var(--encre);color:#fff;padding:14px 18px}
+  .ed-haut h2{font-size:1.25rem;margin:0}
+  .ed-haut p{font-size:.88rem;color:#B9C3CC;margin:4px 0 0}
+  .ed-corps{flex:1;overflow-y:auto;padding:16px 18px 24px}
+  .ed-corps h3{font-size:1.15rem;margin:22px 0 8px;letter-spacing:0}
+  .ed-corps h3:first-child{margin-top:0}
+  .champ{display:block;margin-bottom:12px}
+  .champ span{display:block;font-size:.85rem;font-weight:700;margin-bottom:4px}
+  .champ input,.champ textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:2px solid #C9D0D6;border-radius:10px;background:#fff;color:var(--encre)}
+  .champ textarea{min-height:70px;resize:vertical}
+  .ed-item{background:#EEF1F4;border-radius:12px;padding:12px;margin:12px 0}
+  .ed-corps button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+  .ed-add{background:var(--encre);color:#fff}
+  .ed-sup{background:#fff;color:#B42318;border:2px solid #B42318!important}
+  .ed-bas{display:flex;gap:10px;padding:12px 18px;border-top:2px solid #EEF1F4;background:#fff}
+  .ed-bas button{flex:1;font:inherit;font-weight:700;border:0;border-radius:12px;padding:14px;cursor:pointer;font-size:1rem}
+  .ed-dl{background:var(--citron);color:var(--encre)}
+  .ed-fermer{background:#EEF1F4;color:var(--encre)}
+
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  @media (min-width:700px){.avantages{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<!--
+  ============================================================
+  TES INFOS. Change-les ici, ou plus simplement avec l'éditeur :
+  ajoute #modifier à la fin de l'adresse du site.
+  Instagram et TikTok : écris seulement le nom d'utilisateur,
+  sans @. Laisse vide "" si tu n'en as pas : le bouton disparaît.
+  ============================================================
+-->
+<script>
+const CONFIG = {
+  "nom": "Ton nom ou ton studio",
+  "accroche": "Je crée le site de ton commerce. Tes clients te commandent directement sur WhatsApp.",
+  "whatsapp": "243800000000",
+  "instagram": "",
+  "tiktok": "",
+  "offres": [
+    {"nom": "Site simple", "prix": "30 $", "desc": "Une page avec ta présentation, tes photos, tes horaires et un bouton WhatsApp."},
+    {"nom": "Site avec menu", "prix": "60 $", "desc": "Menu ou catalogue avec les prix, et un bouton « Commander » sur chaque produit."},
+    {"nom": "Mises à jour", "prix": "10 $ / mois", "desc": "Je change tes prix, tes produits et tes photos quand tu en as besoin."}
+  ],
+  "exemples": [
+    {"nom": "Restaurant", "desc": "Menu, plat du jour et commande directe sur WhatsApp.", "url": "https://mrturne44-sys.github.io/Restoration-/"}
+  ]
+};
+</script>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="marque"><i></i><span id="h-nom"></span></div>
+    <h1>Ton commerce en ligne, <em>commandes sur WhatsApp</em></h1>
+    <p class="lead" id="h-accroche"></p>
+    <a class="btn wa" id="h-btn" href="#">Demander mon site</a>
+
+    <div class="chat" aria-hidden="true">
+      <small>Ce que reçoit ton commerçant</small>
+      <div class="bulle recu">Bonjour, je voudrais commander : Poulet moambe.</div>
+      <div class="bulle">Bonjour ! C'est noté, prêt dans 20 minutes.</div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+  <section>
+    <h2>Pourquoi un site ?</h2>
+    <p class="sub">Tes clients te trouvent, voient tes prix et te contactent sans t'appeler.</p>
+    <div class="avantages">
+      <div><strong>Ouvert 24h/24</strong><span>Ton menu et tes prix sont visibles à toute heure.</span></div>
+      <div><strong>Commande directe</strong><span>Un bouton, et le message arrive sur ton WhatsApp.</span></div>
+      <div><strong>Léger</strong><span>S'ouvre vite, même avec une petite connexion.</span></div>
+    </div>
+  </section>
+
+  <section id="offres">
+    <h2>Mes offres</h2>
+    <p class="sub">Touche une offre, WhatsApp s'ouvre avec ton message prêt.</p>
+    <div id="offres-liste"></div>
+  </section>
+
+  <section id="exemples">
+    <h2>Exemples</h2>
+    <p class="sub">Regarde ce que je peux faire pour toi.</p>
+    <div id="exemples-liste"></div>
+  </section>
+
+  <section>
+    <h2>Comment ça se passe</h2>
+    <ol class="etapes">
+      <li><strong>Tu m'écris sur WhatsApp</strong><span>Tu me dis ton commerce et ce que tu vends.</span></li>
+      <li><strong>Je te montre une version</strong><span>Tu vois ton site et tu me dis ce que tu veux changer.</span></li>
+      <li><strong>Ton site est mis en ligne</strong><span>Tu reçois le lien à partager à tes clients.</span></li>
+    </ol>
+  </section>
+
+  <div class="contact" id="contact">
+    <h2>Parlons de ton site</h2>
+    <p>Écris-moi, je te réponds avec un prix adapté à ton commerce.</p>
+    <a class="btn clair" id="c-btn" href="#">Écrire sur WhatsApp</a>
+    <div class="reseaux" id="reseaux"></div>
+  </div>
+</main>
+
+<footer id="pied"></footer>
+
+<a class="flottant" id="flot" href="#">WhatsApp</a>
+
+<script>
+// Copie du fichier d'origine, prise avant tout affichage.
+const SOURCE = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+
+const $ = id => document.getElementById(id);
+const wa = msg => "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg);
+
+function render(){
+  const c = CONFIG;
+  document.title = c.nom + " – Création de sites web";
+  $("h-nom").textContent = c.nom;
+  $("h-accroche").textContent = c.accroche;
+  const general = wa("Bonjour, je voudrais un site pour mon commerce.");
+  $("h-btn").href = general;
+  $("c-btn").href = general;
+  $("flot").href = general;
+  $("pied").textContent = c.nom;
+
+  const ol = $("offres-liste");
+  ol.textContent = "";
+  c.offres.forEach(o => {
+    const box = document.createElement("div"); box.className = "offre";
+    const tete = document.createElement("div"); tete.className = "offre-tete";
+    const h = document.createElement("h3"); h.textContent = o.nom;
+    const p = document.createElement("span"); p.className = "prix"; p.textContent = o.prix;
+    tete.append(h, p);
+    const d = document.createElement("p"); d.textContent = o.desc;
+    const a = document.createElement("a"); a.className = "btn"; a.textContent = "Choisir cette offre";
+    a.href = wa("Bonjour, je suis intéressé par l'offre : " + o.nom + ".");
+    box.append(tete, d, a);
+    ol.appendChild(box);
+  });
+
+  const el2 = $("exemples-liste");
+  el2.textContent = "";
+  c.exemples.forEach(x => {
+    const a = document.createElement("a"); a.className = "exemple"; a.href = x.url;
+    a.target = "_blank"; a.rel = "noopener";
+    const h = document.createElement("h3"); h.textContent = x.nom;
+    const p = document.createElement("p"); p.textContent = x.desc;
+    const s = document.createElement("span"); s.textContent = "Voir l'exemple";
+    a.append(h, p, s);
+    el2.appendChild(a);
+  });
+
+  const r = $("reseaux");
+  r.textContent = "";
+  const ajouter = (texte, url) => {
+    const a = document.createElement("a"); a.textContent = texte; a.href = url;
+    a.target = "_blank"; a.rel = "noopener";
+    r.appendChild(a);
+  };
+  const ig = (c.instagram || "").replace(/[@\s]/g, "");
+  const tt = (c.tiktok || "").replace(/[@\s]/g, "");
+  if(ig) ajouter("Instagram", "https://instagram.com/" + ig);
+  if(tt) ajouter("TikTok", "https://www.tiktok.com/@" + tt);
+}
+
+/* ---------- Éditeur ---------- */
+function el(tag, props, ...kids){
+  const e = document.createElement(tag);
+  Object.assign(e, props || {});
+  kids.forEach(k => e.append(k));
+  return e;
+}
+
+function champ(label, obj, key, opts){
+  opts = opts || {};
+  const inp = el(opts.multi ? "textarea" : "input", {value: obj[key]});
+  if(opts.digits){ inp.inputMode = "numeric"; }
+  inp.addEventListener("input", () => {
+    obj[key] = opts.digits ? inp.value.replace(/\D/g, "") : inp.value;
+    render();
+  });
+  return el("label", {className: "champ"}, el("span", {textContent: label}), inp);
+}
+
+function listeEditeur(box, tableau, champs, modele, libAjout){
+  box.textContent = "";
+  tableau.forEach((item, i) => {
+    const b = el("div", {className: "ed-item"});
+    champs.forEach(ch => b.append(champ(ch[1], item, ch[0], {multi: ch[2]})));
+    const sup = el("button", {type: "button", className: "ed-sup", textContent: "Supprimer"});
+    sup.onclick = () => { tableau.splice(i, 1); render(); listeEditeur(box, tableau, champs, modele, libAjout); };
+    b.append(sup);
+    box.append(b);
+  });
+  const ajout = el("button", {type: "button", className: "ed-add", textContent: libAjout});
+  ajout.onclick = () => { tableau.push(Object.assign({}, modele)); render(); listeEditeur(box, tableau, champs, modele, libAjout); };
+  box.append(ajout);
+}
+
+function telecharger(){
+  const cfg = "const CONFIG = " + JSON.stringify(CONFIG, null, 2) + ";";
+  let html = SOURCE.replace(/const CONFIG = \{[\s\S]*?\n\};/, () => cfg);
+  const titre = "<title>" + CONFIG.nom.replace(/</g, "&lt;") + " – Création de sites web" + "</" + "title>";
+  html = html.replace(/<title>[\s\S]*?<\/title>/, () => titre);
+  const blob = new Blob([html], {type: "text/html"});
+  const a = el("a", {href: URL.createObjectURL(blob), download: "index.html"});
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+function fermerEditeur(){
+  const ed = $("editeur");
+  if(ed) ed.remove();
+  if(location.hash === "#modifier") history.replaceState(null, "", location.pathname + location.search);
+  document.body.style.overflow = "";
+}
+
+function ouvrirEditeur(){
+  if($("editeur")) return;
+  const ed = el("div", {id: "editeur"});
+  const haut = el("div", {className: "ed-haut"},
+    el("h2", {textContent: "Modifier mon site"}),
+    el("p", {textContent: "Le site se met à jour pendant que tu écris. Quand tu as fini, touche « Télécharger » puis remplace index.html sur GitHub."})
+  );
+
+  const corps = el("div", {className: "ed-corps"});
+  corps.append(el("h3", {textContent: "Mes infos"}));
+  corps.append(
+    champ("Ton nom ou nom de ton studio", CONFIG, "nom"),
+    champ("Phrase d'accroche", CONFIG, "accroche", {multi: true}),
+    champ("Numéro WhatsApp (chiffres seulement, ex : 243812345678)", CONFIG, "whatsapp", {digits: true}),
+    champ("Instagram (nom d'utilisateur, sans @)", CONFIG, "instagram"),
+    champ("TikTok (nom d'utilisateur, sans @)", CONFIG, "tiktok")
+  );
+
+  corps.append(el("h3", {textContent: "Mes offres"}));
+  const boxOffres = el("div");
+  corps.append(boxOffres);
+  listeEditeur(boxOffres, CONFIG.offres,
+    [["nom", "Nom de l'offre"], ["prix", "Prix (ex : 30 $)"], ["desc", "Description", true]],
+    {nom: "Nouvelle offre", prix: "0 $", desc: ""}, "Ajouter une offre");
+
+  corps.append(el("h3", {textContent: "Mes exemples"}));
+  const boxEx = el("div");
+  corps.append(boxEx);
+  listeEditeur(boxEx, CONFIG.exemples,
+    [["nom", "Nom"], ["desc", "Description", true], ["url", "Lien du site exemple"]],
+    {nom: "Nouvel exemple", desc: "", url: "https://"}, "Ajouter un exemple");
+
+  const bas = el("div", {className: "ed-bas"});
+  const dl = el("button", {type: "button", className: "ed-dl", textContent: "Télécharger"});
+  dl.onclick = telecharger;
+  const fer = el("button", {type: "button", className: "ed-fermer", textContent: "Fermer"});
+  fer.onclick = fermerEditeur;
+  bas.append(dl, fer);
+
+  ed.append(haut, corps, bas);
+  document.body.appendChild(ed);
+  document.body.style.overflow = "hidden";
+}
+
+render();
+if(location.hash === "#modifier") ouvrirEditeur();
+window.addEventListener("hashchange", () => {
+  if(location.hash === "#modifier") ouvrirEditeur();
+});
+</script>
+</body>
+</html>
