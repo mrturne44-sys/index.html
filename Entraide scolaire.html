@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entraide Scolaire – 6ème humanités</title>
+<style>
+:root{--paper:#f4f7fb;--ink:#17254a;--muted:#55627f;--line:#cfd9ea;--blue:#2347a8;--hl:#ffd84a;--ok:#1d7a4a;--card:#fff;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0f1626;--ink:#e8edf8;--muted:#9aa7c4;--line:#27334f;--blue:#8fb0ff;--hl:#e0b92c;--ok:#5fd397;--card:#16203a;--on:#0f1626}}
+:root[data-theme="dark"]{--paper:#0f1626;--ink:#e8edf8;--muted:#9aa7c4;--line:#27334f;--blue:#8fb0ff;--hl:#e0b92c;--ok:#5fd397;--card:#16203a;--on:#0f1626}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:20px 16px 48px}
+h1{font:700 28px/1.2 Georgia,"Times New Roman",serif;margin:8px 0 6px}
+h1 mark{background:linear-gradient(transparent 55%,var(--hl) 55%);color:inherit;padding:0 2px}
+.sub{color:var(--muted);margin:0 0 18px}
+nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px}
+nav button{flex:0 0 auto;font:600 15px system-ui,sans-serif;padding:10px 14px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+nav button[aria-selected="true"]{border-color:var(--blue);background:var(--blue);color:var(--on)}
+#subs button{font-size:14px;padding:7px 12px;border-radius:20px}
+button:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--hl);outline-offset:2px}
+.notebook{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:6px;padding:4px 16px 12px;margin:6px 0 16px;background-image:repeating-linear-gradient(transparent,transparent 31px,var(--line) 32px);background-attachment:local}
+.notebook h2{font:700 19px/1.4 Georgia,serif;margin:14px 0 4px}
+.notebook p{margin:0 0 8px}
+code{display:block;font:600 16px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--blue);overflow-x:auto;white-space:nowrap;margin:0 0 8px}
+h3{font:700 17px Georgia,serif;margin:22px 0 8px}
+details{background:var(--card);border:1px solid var(--line);border-radius:8px;margin-bottom:8px}
+summary{cursor:pointer;padding:12px 14px;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"Voir la correction";display:block;font-weight:500;font-size:13px;color:var(--blue)}
+details[open] summary::after{content:"Masquer"}
+.corr{padding:0 14px 12px;color:var(--ok);font-weight:500}
+.contact{margin-top:28px;padding:16px;border-radius:10px;background:var(--card);border:1px solid var(--line)}
+.contact a{display:inline-block;margin-top:6px;padding:11px 18px;border-radius:10px;background:var(--ok);color:var(--on);font-weight:700;text-decoration:none}
+footer{margin-top:20px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<h1>Entraide <mark>scolaire</mark></h1>
+<p class="sub">6ème humanités : résumés et exercices corrigés pour l'examen d'État. Site léger, fait pour les petits forfaits.</p>
+<nav id="secs" role="tablist" aria-label="Sections"></nav>
+<nav id="subs" role="tablist" aria-label="Matières"></nav>
+<div id="out"></div>
+<div class="contact"><b>Une question ? Un cours à ajouter ?</b><br><a id="wa" href="#">Écrire sur WhatsApp</a></div>
+<footer>Contenu en cours d'ajout. Vérifie toujours avec ton cahier, ton programme et ton professeur.</footer>
+</main>
+<script>
+var NUMERO="243000000000"; // remplace par ton numéro WhatsApp (format 243...)
+var D=[
+{n:"Tronc commun",s:[
+ {n:"Français",t:"<h2>Participe passé avec « avoir »</h2><p>Il s'accorde avec le COD seulement si le COD est placé avant le verbe.</p><p>Les fleurs que j'ai <b>cueillies</b> (COD avant). J'ai cueilli des fleurs (COD après : pas d'accord).</p><h2>Passé composé</h2><p>Auxiliaire au présent + participe passé.</p><code>Elle mange → elle a mangé</code>",
+  e:[["Accorde : « Les lettres que j'ai (écrire). »","Les lettres que j'ai écrites."],["Passé composé : « Nous finissons le travail. »","Nous avons fini le travail."],["Accorde : « Elles sont (venir) hier. »","Elles sont venues hier (avec « être », accord avec le sujet)."]]}
+]},
+{n:"Scientifique",s:[
+ {n:"Maths",t:"<h2>Équation du 2nd degré</h2><p>ax² + bx + c = 0 (a ≠ 0)</p><code>Δ = b² − 4ac</code><p>Δ &gt; 0 : x = (−b ± √Δ) / 2a. Δ = 0 : x = −b / 2a. Δ &lt; 0 : pas de solution réelle.</p><h2>Dérivées usuelles</h2><code>(xⁿ)' = n·xⁿ⁻¹</code><code>(eˣ)' = eˣ  (ln x)' = 1/x</code><code>(sin x)' = cos x  (cos x)' = −sin x</code>",
+  e:[["Résous x² − 5x + 6 = 0","Δ = 25 − 24 = 1. x = (5 ± 1) / 2, donc x = 3 ou x = 2."],["Dérive f(x) = 3x² + 2x − 5","f'(x) = 6x + 2."],["Résous x² + 4x + 4 = 0","Δ = 0. x = −4 / 2 = −2 (solution double)."]]},
+ {n:"Physique",t:"<h2>Loi d'Ohm</h2><code>U = R × I</code><p>U en volts, R en ohms (Ω), I en ampères.</p><h2>Vitesse moyenne</h2><code>v = d / t</code>",
+  e:[["R = 10 Ω et I = 2 A. Calcule U.","U = 10 × 2 = 20 V."],["Un bus fait 120 km en 2 h. Vitesse ?","v = 120 / 2 = 60 km/h."]]},
+ {n:"Biologie",t:"<h2>Photosynthèse</h2><p>Les plantes vertes utilisent la lumière et la chlorophylle pour fabriquer du sucre.</p><code>6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</code>",
+  e:[["Quel gaz la plante rejette-t-elle ?","Le dioxygène (O₂)."],["Quel gaz la plante absorbe-t-elle ?","Le dioxyde de carbone (CO₂)."]]}
+]},
+{n:"Pédagogie",s:[
+ {n:"Psychologie",t:"<h2>Stades de Piaget</h2><p><b>Sensori-moteur</b> : 0 à 2 ans.</p><p><b>Préopératoire</b> : 2 à 7 ans.</p><p><b>Opératoire concret</b> : 7 à 11-12 ans.</p><p><b>Opératoire formel</b> : dès 11-12 ans, raisonnement abstrait.</p>",
+  e:[["Un enfant de 5 ans est à quel stade ?","Le stade préopératoire."],["À quel stade apparaît le raisonnement abstrait ?","Au stade opératoire formel."]]},
+ {n:"Didactique",t:"<h2>Étapes d'une leçon</h2><p>Introduction (rappel et motivation), développement (explication), application (exercices), conclusion (synthèse).</p><h2>Objectif pédagogique</h2><p>Ce que l'élève saura faire à la fin de la leçon. Il commence par un verbe d'action.</p>",
+  e:[["Quelle étape permet à l'élève de s'exercer ?","L'application."],["Donne un exemple d'objectif bien formulé.","« À la fin de la leçon, l'élève sera capable de résoudre une équation du 2nd degré. »"]]}
+]},
+{n:"Commerciale",s:[
+ {n:"Comptabilité",t:"<h2>Équation du bilan</h2><code>Actif = Capitaux propres + Dettes</code><h2>Résultat</h2><code>Résultat = Produits − Charges</code><p>Produits &gt; charges : bénéfice. Sinon : perte.</p>",
+  e:[["Capitaux propres 5 000 $, dettes 2 000 $. Actif ?","Actif = 5 000 + 2 000 = 7 000 $."],["Produits 8 000 $, charges 6 500 $. Résultat ?","8 000 − 6 500 = 1 500 $ de bénéfice."]]},
+ {n:"Maths financières",t:"<h2>Intérêt simple</h2><code>I = C × t × n / 100</code><p>C : capital, t : taux (%), n : durée en années.</p>",
+  e:[["C = 1 000 $, t = 5 %, n = 2 ans. Intérêt ?","I = 1 000 × 5 × 2 / 100 = 100 $."],["Quelle somme au total après ces 2 ans ?","1 000 + 100 = 1 100 $."]]}
+]},
+{n:"Littéraire",s:[
+ {n:"Figures de style",t:"<h2>Les plus courantes</h2><p><b>Comparaison</b> : avec un outil (comme, tel…).</p><p><b>Métaphore</b> : comparaison sans outil.</p><p><b>Personnification</b> : donner des traits humains à une chose.</p><p><b>Hyperbole</b> : exagération.</p>",
+  e:[["« Il est fort comme un lion. »","Comparaison (outil « comme »)."],["« Cette ville est un volcan. »","Métaphore (pas d'outil de comparaison)."],["« Le vent chuchote dans les arbres. »","Personnification."]]},
+ {n:"Histoire RDC",t:"<h2>Repères</h2><p><b>30 juin 1960</b> : indépendance du Congo. Patrice Lumumba, Premier ministre. Joseph Kasa-Vubu, président.</p><p><b>1965</b> : Mobutu prend le pouvoir.</p><p><b>1971</b> : le pays devient le Zaïre.</p><p><b>1997</b> : le pays redevient la RDC.</p>",
+  e:[["Date de l'indépendance du Congo ?","Le 30 juin 1960."],["Qui était le premier Premier ministre ?","Patrice Lumumba."]]}
+]},
+{n:"Technique",s:[
+ {n:"Électricité",t:"<h2>Loi d'Ohm</h2><code>U = R × I</code><h2>Puissance</h2><code>P = U × I</code><h2>Énergie</h2><code>E = P × t</code><p>P en watts, t en heures : E en Wh (÷ 1 000 pour kWh).</p>",
+  e:[["U = 220 V et I = 5 A. Puissance ?","P = 220 × 5 = 1 100 W."],["Cet appareil tourne 3 h. Énergie ?","E = 1 100 × 3 = 3 300 Wh = 3,3 kWh."]]}
+]}];
+var si=0,ji=0;
+function btn(l,sel,f){var b=document.createElement("button");b.textContent=l;b.setAttribute("role","tab");b.setAttribute("aria-selected",sel);b.onclick=f;return b}
+function draw(){
+ var S=document.getElementById("secs"),J=document.getElementById("subs"),O=document.getElementById("out");
+ S.innerHTML="";J.innerHTML="";
+ D.forEach(function(x,i){S.appendChild(btn(x.n,i==si,function(){si=i;ji=0;draw()}))});
+ var sec=D[si];
+ sec.s.forEach(function(x,i){J.appendChild(btn(x.n,i==ji,function(){ji=i;draw()}))});
+ var m=sec.s[ji],h='<div class="notebook">'+m.t+'</div><h3>Exercices</h3>';
+ m.e.forEach(function(q,i){h+='<details><summary>'+(i+1)+'. '+q[0]+'</summary><div class="corr">'+q[1]+'</div></details>'});
+ O.innerHTML=h;
+}
+document.getElementById("wa").href="https://wa.me/"+NUMERO+"?text="+encodeURIComponent("Bonjour, j'ai une question sur le site d'entraide scolaire.");
+draw();
+</script>
+</body>
+</html>
